@@ -1,6 +1,7 @@
 ﻿using MegaHack.Business.Context;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MegaHack.Business.BusinessModels
@@ -14,9 +15,11 @@ namespace MegaHack.Business.BusinessModels
             _context = context;
         }
 
-        public string get()
+        public string GetClientName(string Name)
         {
-            return "";
+            var client = _context.Client.Where(cli => cli.Name == Name).FirstOrDefault;
+
+            return client == null ? "Cliente não encontrado" : client.Name;
         }
     }
 }
