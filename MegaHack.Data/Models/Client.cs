@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MegaHack.Data.Models
 {
@@ -11,19 +11,19 @@ namespace MegaHack.Data.Models
 
         [Required] public string Name { get; set; }
 
-        public string NickName { get; set; }
+        [Required] public Guid Token { get; set; }
 
-        [Required] public string Login { get; set; }
+        public string Gender { get; set; }
 
         [Required] public string Password { get; set; }
 
         [Required] public string Email { get; set; }
 
-        [Required] public ICollection<Contact> Contacts { get; set; }
+        public int Age { get; set; }
 
-        [Required] public DateTime DateBirth { get; set; }
+        public int MyBonus { get; set; }
 
-        [Required] public int Age { get; set; }
-
+        [InverseProperty(nameof(BonusClient.Client))]
+        public virtual ICollection<BonusClient> BonusClients { get; set; }
     }
 }

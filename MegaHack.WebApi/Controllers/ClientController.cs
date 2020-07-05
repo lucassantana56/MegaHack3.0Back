@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MegaHack.Business.BusinessModels;
 using MegaHack.Business.Repository;
-using Microsoft.AspNetCore.Http;
+using MegaHack.Business.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MegaHack.WebApi.Controllers
@@ -20,6 +17,17 @@ namespace MegaHack.WebApi.Controllers
         {
             _clientRepository = clientRepository;
             _clientBLL = clientBLL;
+        }
+
+        [HttpPost]
+        public IActionResult AddClient(AddClientViewModel addClientViewModel)
+        {
+            var result = _clientRepository.AddClient(addClientViewModel);
+            if (result == Guid.Empty)
+                return BadRequest("Email invalid");
+
+            return Ok(result);
+
         }
     }
 }

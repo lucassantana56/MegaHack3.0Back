@@ -13,6 +13,8 @@ namespace MegaHack.Business.Context
         public DbSet<Company> Company { get; set; }
         public DbSet<Contact> Contact { get; set; }
         public DbSet<Client> Client { get; set; }
+
+        public DbSet<Bonus> Bonus { get; set; }
+        public DbSet<BonusClient> BonusClient { get; set; }
     }
-    
 }

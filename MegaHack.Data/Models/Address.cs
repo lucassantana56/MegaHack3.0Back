@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,10 +15,12 @@ namespace MegaHack.Data.Models
 
         [Required] public string Street { get; set; }
 
-        [Required] public int Cep { get; set; }
+        [Required] public string Cep { get; set; }
 
-    
-        [InverseProperty(nameof(Company.Address))]
-        public virtual ICollection<Company> Businesses { get; set; }
+        [Required] public string Geolocation { get; set; }
+
+        public int CompanyId { get; set; }
+
+        [ForeignKey(nameof(CompanyId))] public virtual Company Company { get; set; }
     }
 }

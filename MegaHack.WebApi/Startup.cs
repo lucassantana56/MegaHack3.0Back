@@ -37,6 +37,10 @@ namespace MegaHack.WebApi
 
             services.AddTransient<CompanyRepository>();
             services.AddTransient<CompanyBLL>();
+            services.AddTransient<ClientRepository>();
+            services.AddTransient<ClientBLL>();
+            services.AddTransient<BonusBLL>();
+            services.AddTransient<BonusRepository>();
 
         }
 

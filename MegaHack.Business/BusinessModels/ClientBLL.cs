@@ -17,7 +17,7 @@ namespace MegaHack.Business.BusinessModels
 
         public string GetClientName(string Name)
         {
-            var client = _context.Client.Where(cli => cli.Name == Name).FirstOrDefault;
+            var client = _context.Client.Where(cli => cli.Name == Name).FirstOrDefault();
 
             return client == null ? "Cliente não encontrado" : client.Name;
         }

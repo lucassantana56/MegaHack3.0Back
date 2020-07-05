@@ -17,7 +17,7 @@ namespace MegaHack.Business.Repository
             _context = context;
         }
 
-        public void AddNewCompany(AddComanyViewModel addComanyViewModel)
+        public Guid AddNewCompany(AddComanyViewModel addComanyViewModel)
         {
             if (addComanyViewModel is null)
             {
@@ -25,23 +25,54 @@ namespace MegaHack.Business.Repository
             }
             try
             {
+                Guid companyToken = Guid.NewGuid();
                 Company company = new Company()
                 {
-                    Email = addComanyViewModel.Email,
-                    Name = addComanyViewModel.Name,
-                    Description = addComanyViewModel.Description,
-                    NickName = addComanyViewModel.NickName
+                    Email = addComanyViewModel.email,
+                    Name = addComanyViewModel.name,
+                    Description = addComanyViewModel.description,
+                    NickName = addComanyViewModel.nickName,
+                    BusinessRate = 0,
+                    FiscalId = addComanyViewModel.fiscalId,
+                    Token = companyToken,
+                    Password = addComanyViewModel.password
                 };
 
                 _context.Company.Add(company);
+
+                Address address = new Address()
+                {
+                    AddressNumber = addComanyViewModel.addressNumber,
+                    Cep = addComanyViewModel.cep,
+                    Street = addComanyViewModel.street,
+                    City = addComanyViewModel.city,
+                    Geolocation = addComanyViewModel.geolocation,
+                    Company = company
+                };
+
+                _context.Address.Add(address);
+
+                Contact contact = new Contact()
+                {
+                    MobilePhone = addComanyViewModel.mobilePhone,
+                    Phone = addComanyViewModel.phone,
+                    Whatsapp = addComanyViewModel.whatsapp,
+                    LocationCode = addComanyViewModel.LocationCode,
+                    Company = company
+                };
+
+                _context.Contact.Add(contact);
+
                 _context.SaveChanges();
+
+                return companyToken;
             }
             catch (Exception e)
             {
 
                 throw e;
             }
-       
+
         }
 
         public void UpdateCompany(AddComanyViewModel addComanyViewModel)
@@ -52,14 +83,9 @@ namespace MegaHack.Business.Repository
             }
             try
             {
-                var company = _context.Company.Where(c => c.FiscalId == addComanyViewModel.FiscalId).ToList();
-
-              
-              //  company.Description = "nova des";
-               // company.Email = "novo email";
 
 
-                _context.SaveChanges();
+
             }
             catch (Exception e)
             {

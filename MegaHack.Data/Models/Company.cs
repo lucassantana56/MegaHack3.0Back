@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +10,10 @@ namespace MegaHack.Data.Models
         [Key] public int CompanyId { get; set; }
 
         [Required] public string Name { get; set; }
+        
+        [Required] public string Password{ get; set; }
+
+        [Required] public Guid Token { get; set; }
 
         [Required] public string NickName { get; set; }
 
@@ -20,10 +25,13 @@ namespace MegaHack.Data.Models
 
         [Required] public int BusinessRate { get; set; }
 
-        [Required] public int AddressId { get; set; }
+        [InverseProperty(nameof(Contact.Company))]
+        public ICollection<Contact> Contacts { get; set; }
 
-        [ForeignKey(nameof(AddressId))] public virtual Address Address { get; set; }
+        [InverseProperty(nameof(Address.Company))]
+        public ICollection<Address> Addresses { get; set; }
 
-        [InverseProperty(nameof(Contact.Company))] public ICollection<Contact> Contacts { get; set; } //Um bar/pub pode ter muitos contactos 
+        [InverseProperty(nameof(Bonus.Company))]
+        public ICollection<Bonus> Bonuses { get; set; }
     }
 }

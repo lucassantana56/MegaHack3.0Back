@@ -1,4 +1,5 @@
 ﻿using MegaHack.Business.Context;
+using MegaHack.Business.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +35,29 @@ namespace MegaHack.Business.BusinessModels
 
             return companyContact;
         }
+
+        public IList<CompanyInfoConsolidate> GetCompanyInfoConsolidate()
+        {
+            var companyInfo = (from cp in _context.Company
+                               join ad in _context.Address
+                               on cp.CompanyId equals ad.CompanyId
+                               select new CompanyInfoConsolidate
+                               {
+                                   CompanyRate = cp.BusinessRate,
+                                   Geolocation = ad.Geolocation,
+                                   Name = cp.Name
+                               }).ToList();
+
+            return companyInfo;
+        }
+
+        public Guid VerifyIfCompanyExist(LoginCompanyViewModel lvm)
+        {
+            var token = _context.Company.Where(c => c.Email == lvm.email && c.Password == lvm.password && c.FiscalId == lvm.fiscalId).FirstOrDefault();
+
+            return token == null ? Guid.Empty : token.Token;
+
+        } 
+        
     }
 }
