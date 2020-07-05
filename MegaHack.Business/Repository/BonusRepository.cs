@@ -3,6 +3,7 @@ using MegaHack.Business.ViewModel;
 using MegaHack.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MegaHack.Business.Repository
@@ -18,6 +19,14 @@ namespace MegaHack.Business.Repository
 
         public void CreateBonus(AddBonusViewModel addBonusViewModel)
         {
+            Guid cToken = Guid.Parse(addBonusViewModel.companyToken);
+            var company = _context.Company.Where(c => c.Token == cToken).FirstOrDefault();
+
+            if (company == null)
+            {
+                return;
+            }
+
             Bonus bonus = new Bonus()
             {
                 CreatedOn = DateTime.Now,
@@ -26,12 +35,16 @@ namespace MegaHack.Business.Repository
                 ImageUrl = addBonusViewModel.imageUrl,
                 Name = addBonusViewModel.name,
                 QuantBonus = addBonusViewModel.quantBonus,
-                CompanyId = addBonusViewModel.companyId
+                CompanyId = company.CompanyId
             };
 
             _context.Bonus.Add(bonus);
             _context.SaveChanges();
         }
+
+        // Receber ClientID 
+        // Realizar uma busca - find
+        // Atualizar propriedades do objeto
 
     }
 }

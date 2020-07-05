@@ -11,6 +11,6 @@ namespace MegaHack.Business.ViewModel
         public string description { get; set; }
         public int quantBonus { get; set; }
         public DateTime expirationDate { get; set; }
-        public int companyId { get; set; }
+        public string companyToken { get; set; }
     }
 }
