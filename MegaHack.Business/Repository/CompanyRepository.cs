@@ -95,5 +95,9 @@ namespace MegaHack.Business.Repository
 
         }
 
+        // Receber ClientID 
+        // Realizar uma busca - find
+        // Atualizar propriedades do objeto
+
     }
 }
