@@ -42,7 +42,7 @@ namespace MegaHack.Business.Repository
 
                 Address address = new Address()
                 {
-                    AddressNumber = addComanyViewModel.addressNumber,
+                    AddressNumber = int.Parse(addComanyViewModel.addressNumber),
                     Cep = addComanyViewModel.cep,
                     Street = addComanyViewModel.street,
                     City = addComanyViewModel.city,
@@ -54,10 +54,10 @@ namespace MegaHack.Business.Repository
 
                 Contact contact = new Contact()
                 {
-                    MobilePhone = addComanyViewModel.mobilePhone,
-                    Phone = addComanyViewModel.phone,
-                    Whatsapp = addComanyViewModel.whatsapp,
-                    LocationCode = addComanyViewModel.LocationCode,
+                    MobilePhone =int.Parse(addComanyViewModel.mobilePhone),
+                    Phone = int.Parse(addComanyViewModel.phone),
+                    Whatsapp = int.Parse(addComanyViewModel.whatsapp),
+                    LocationCode = int.Parse(addComanyViewModel.LocationCode),
                     Company = company
                 };
 

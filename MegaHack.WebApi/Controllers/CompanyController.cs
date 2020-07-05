@@ -31,7 +31,7 @@ namespace MegaHack.WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCompany([FromForm]AddComanyViewModel addComanyViewModel)
+        public IActionResult AddCompany(AddComanyViewModel addComanyViewModel)
         {
             try
             {
