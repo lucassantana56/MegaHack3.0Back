@@ -36,14 +36,22 @@ namespace MegaHack.Business.BusinessModels
                                {
                                    ClientID = c.ClientID,
                                    ClientName = c.Name,
-                                   qauntPontos = bn.QuantBonus
+                                   quantidadePontos = bn.QuantBonus
                                }).ToList();
 
             return bonusClient;
         }
+        
+        public void PostClientBonus(int clientID, int qtdPontos)
+        {
+            var client = _context.Client.Where(cb => cb.ClientID == clientID).Provider;
 
-        // update parametro idClient, qtdPontos
-        // bonusClient Pending  = false
-        // qtdPontos add aos pontos do cliente
+            var bonusClient = (from c in _context.Client
+                              join b in _context.BonusClient
+                              on c.ClientID equals b.ClientId
+                              where c.ClientID == clientID
+                              && b.PendingToActive == false
+                              select b);
+        }
     }
 }
