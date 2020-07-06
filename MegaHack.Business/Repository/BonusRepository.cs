@@ -4,6 +4,7 @@ using MegaHack.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace MegaHack.Business.Repository
@@ -41,10 +42,20 @@ namespace MegaHack.Business.Repository
             _context.Bonus.Add(bonus);
             _context.SaveChanges();
         }
+       
+        public void UpdateBonus(ClientBonusViewModel clientBonusViewModel)
+        {
+            if (clientBonusViewModel == null)
+            {
+                return;
+            }
 
-        // Receber ClientID 
-        // Realizar uma busca - find
-        // Atualizar propriedades do objeto
+            int client = clientBonusViewModel.ClientID;
+            BonusClient cli = _context.BonusClient.Where(c => c.ClientId == client).FirstOrDefault();
 
+            cli.BonusId = clientBonusViewModel.quantidadePontos;
+
+            _context.SaveChanges();
+        }
     }
 }
