@@ -10,7 +10,7 @@ namespace MegaHack.Business.ViewModel
 
         public string ClientName { get; set; }
 
-        public int qauntPontos { get; set; }
+        public int quantidadePontos { get; set; }
 
     }
 }
