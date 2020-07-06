@@ -43,7 +43,5 @@ namespace MegaHack.WebApi.Controllers
                 return BadRequest(e);
             }
         }
-
-        //update p
     }
 }
